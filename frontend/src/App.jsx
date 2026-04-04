@@ -6,6 +6,7 @@ import DietTracker from './components/DietTracker';
 import HealthRecords from './components/HealthRecords';
 import Credentials from './components/Credentials';
 import VerifyPage from './components/VerifyPage';
+import LandingPage from './components/LandingPage';
 import { useStore } from './store/useStore';
 
 function App() {
@@ -29,7 +30,8 @@ function App() {
 
         <main className="flex-grow p-4">
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/health" element={<HealthRecords />} />
             <Route path="/diet" element={<DietTracker />} />
             <Route path="/credentials" element={<Credentials />} />
