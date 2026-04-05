@@ -15,10 +15,8 @@ with open("app/contracts/AthleteCredentialNFT.json", "r") as f:
     contract_abi = json.load(f)["abi"]
 
 # Initialize Web3
-if POLYGON_RPC:
-    w3 = Web3(Web3.HTTPProvider(POLYGON_RPC))
-    if CONTRACT_ADDRESS:
-        contract = w3.eth.contract(address=CONTRACT_ADDRESS, abi=contract_abi)
+w3 = Web3(Web3.HTTPProvider(POLYGON_RPC))
+contract = w3.eth.contract(address=CONTRACT_ADDRESS, abi=contract_abi)
 
 def mint_credential_nft(
     athlete_address: str,

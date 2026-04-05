@@ -84,7 +84,7 @@ def calculate_risk_score(user_id: int, db: Session = Depends(get_db)):
 @router.get("/risk-history/{user_id}")
 def get_risk_history(user_id: int, db: Session = Depends(get_db)):
     """
-    Get risk score history
+    Get risk history
     """
     scores = db.query(RiskScore).filter(
         RiskScore.user_id == user_id

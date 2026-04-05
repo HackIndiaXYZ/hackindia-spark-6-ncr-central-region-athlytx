@@ -48,3 +48,21 @@ def predict_injury_risk(features: Dict) -> Tuple[float, str]:
         recommendations.append("🚨 High risk - consult with sports nutritionist/doctor")
     
     return float(risk_score), " | ".join(recommendations)
+
+
+# For production: Load trained XGBoost model
+"""
+import joblib
+model = joblib.load("app/ml_models/trained_model.pkl")
+
+def predict_injury_risk_ml(features: Dict) -> Tuple[float, str]:
+    feature_vector = np.array([[
+        features["avg_calories"],
+        features["avg_protein"],
+        features["bmi"],
+        features["training_days"]
+    ]])
+    
+    risk_score = model.predict(feature_vector)[0]
+    return risk_score, generate_recommendations(risk_score)
+"""
