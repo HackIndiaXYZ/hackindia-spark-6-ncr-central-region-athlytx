@@ -1,7 +1,6 @@
 import { Web3Auth } from "@web3auth/modal";
 import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
 import { CHAIN_NAMESPACES } from "@web3auth/base";
-import { ethers } from "ethers";
 
 const clientId = import.meta.env.VITE_WEB3AUTH_CLIENT_ID;
 
