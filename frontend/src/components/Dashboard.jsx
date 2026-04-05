@@ -3,7 +3,7 @@ import { useStore } from '../store/useStore';
 import { calculateRiskScore, getRiskHistory } from '../services/api';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import toast from 'react-hot-toast';
-import { TrendingUp, Award, Activity } from 'lucide-react';
+import { TrendingUp, Award } from 'lucide-react';
 
 export default function Dashboard() {
   const { user, currentRiskScore, setRiskScore } = useStore();
@@ -53,7 +53,6 @@ export default function Dashboard() {
       <h1 className="text-3xl font-bold text-white mb-8">Welcome, {user?.name || 'Athlete'}!</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        {/* Risk Score Widget */}
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-center space-x-2 mb-4">
             <TrendingUp className="h-6 w-6 text-purple-600" />
@@ -102,7 +101,6 @@ export default function Dashboard() {
           )}
         </div>
 
-        {/* Quick Stats */}
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-center space-x-2 mb-4">
             <Award className="h-6 w-6 text-purple-600" />
@@ -127,7 +125,6 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Risk History Chart */}
       {riskHistory.length > 0 && (
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-xl font-semibold mb-4">Risk Score History</h2>
