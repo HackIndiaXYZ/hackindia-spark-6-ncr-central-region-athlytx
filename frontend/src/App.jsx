@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Dashboard from './components/Dashboard';
@@ -8,9 +8,36 @@ import Credentials from './components/Credentials';
 import VerifyPage from './components/VerifyPage';
 import LandingPage from './components/LandingPage';
 import { useStore } from './store/useStore';
+import { initWeb3Auth } from './services/web3auth';
 
 function App() {
   const { user } = useStore();
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    const init = async () => {
+      try {
+        await initWeb3Auth();
+        setIsInitialized(true);
+      } catch (error) {
+        console.error('Web3Auth initialization error:', error);
+        // Still set initialized to true to show the app
+        setIsInitialized(true);
+      }
+    };
+    init();
+  }, []);
+
+  if (!isInitialized) {
+    return (
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-white text-xl">Loading ATHLYX...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <BrowserRouter>
