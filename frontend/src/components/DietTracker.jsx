@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useStore } from '../store/useStore';
 import { logDiet, getDietSummary, getFoodDatabase } from '../services/api';
 import toast from 'react-hot-toast';
+import { Apple, TrendingUp } from 'lucide-react';
 
 export default function DietTracker() {
   const { user } = useStore();
@@ -77,13 +78,16 @@ export default function DietTracker() {
   const macros = getMacros();
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-8">Diet Tracker</h1>
+    <div className="max-w-6xl mx-auto p-6">
+      <h1 className="text-3xl font-bold text-white mb-8">Diet Tracker</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Log Diet Form */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold mb-4">Log Meal</h2>
+          <h2 className="text-xl font-semibold mb-4 flex items-center space-x-2">
+            <Apple className="h-5 w-5" />
+            <span>Log Meal</span>
+          </h2>
           
           <form onSubmit={handleLogDiet} className="space-y-4">
             <div>
@@ -118,7 +122,7 @@ export default function DietTracker() {
 
             <div>
               <label className="block text-sm font-medium mb-2">
-                Quantity (grams): {quantity}g
+                Quantity: {quantity}g
               </label>
               <input
                 type="range"
@@ -132,7 +136,7 @@ export default function DietTracker() {
             </div>
 
             {macros && (
-              <div className="p-4 bg-gray-50 rounded-md">
+              <div className="p-4 bg-purple-50 rounded-md">
                 <h3 className="font-semibold mb-2">Nutrition Info</h3>
                 <div className="grid grid-cols-2 gap-2 text-sm">
                   <div>Calories: <span className="font-semibold">{macros.calories} kcal</span></div>
@@ -145,7 +149,7 @@ export default function DietTracker() {
 
             <button
               type="submit"
-              className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              className="w-full px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700"
             >
               Log Meal
             </button>
@@ -154,17 +158,20 @@ export default function DietTracker() {
 
         {/* Today's Summary */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold mb-4">Today's Summary</h2>
+          <h2 className="text-xl font-semibold mb-4 flex items-center space-x-2">
+            <TrendingUp className="h-5 w-5" />
+            <span>Today's Summary</span>
+          </h2>
           
           {todaySummary ? (
             <div className="space-y-4">
-              <div className="p-4 bg-blue-50 rounded-md">
-                <div className="text-4xl font-bold text-blue-600">
+              <div className="p-4 bg-purple-50 rounded-md">
+                <div className="text-4xl font-bold text-purple-600">
                   {todaySummary.total_calories.toFixed(0)}
                 </div>
                 <div className="text-sm text-gray-600">Total Calories</div>
               </div>
-
+              
               <div className="space-y-3">
                 <div>
                   <div className="flex justify-between text-sm mb-1">
@@ -172,43 +179,43 @@ export default function DietTracker() {
                     <span className="font-semibold">{todaySummary.total_protein.toFixed(1)}g</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
-                      className="bg-red-500 h-2 rounded-full" 
+                    <div
+                      className="bg-red-500 h-2 rounded-full"
                       style={{ width: `${Math.min((todaySummary.total_protein / 150) * 100, 100)}%` }}
                     />
                   </div>
                   <div className="text-xs text-gray-500 mt-1">Target: 150g</div>
                 </div>
-
+                
                 <div>
                   <div className="flex justify-between text-sm mb-1">
                     <span>Carbs</span>
                     <span className="font-semibold">{todaySummary.total_carbs.toFixed(1)}g</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
-                      className="bg-yellow-500 h-2 rounded-full" 
+                    <div
+                      className="bg-yellow-500 h-2 rounded-full"
                       style={{ width: `${Math.min((todaySummary.total_carbs / 300) * 100, 100)}%` }}
                     />
                   </div>
                   <div className="text-xs text-gray-500 mt-1">Target: 300g</div>
                 </div>
-
+                
                 <div>
                   <div className="flex justify-between text-sm mb-1">
                     <span>Fats</span>
                     <span className="font-semibold">{todaySummary.total_fats.toFixed(1)}g</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
-                      className="bg-green-500 h-2 rounded-full" 
+                    <div
+                      className="bg-green-500 h-2 rounded-full"
                       style={{ width: `${Math.min((todaySummary.total_fats / 70) * 100, 100)}%` }}
                     />
                   </div>
                   <div className="text-xs text-gray-500 mt-1">Target: 70g</div>
                 </div>
               </div>
-
+              
               <div className="text-sm text-gray-600 mt-4">
                 Meals logged: {todaySummary.meals_logged}
               </div>

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useStore } from '../store/useStore';
 import { calculateRiskScore, getRiskHistory } from '../services/api';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import toast from 'react-hot-toast';
+import { TrendingUp, Award, Activity } from 'lucide-react';
 
 export default function Dashboard() {
   const { user, currentRiskScore, setRiskScore } = useStore();
@@ -32,8 +33,7 @@ export default function Dashboard() {
       toast.success('Risk score calculated!');
       fetchRiskHistory();
     } catch (error) {
-      toast.error('Failed to calculate risk score');
-      console.error(error);
+      toast.error(error.response?.data?.detail || 'Failed to calculate risk score');
     } finally {
       setLoading(false);
     }
@@ -50,12 +50,15 @@ export default function Dashboard() {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-8">Welcome, {user?.name || 'Athlete'}!</h1>
+      <h1 className="text-3xl font-bold text-white mb-8">Welcome, {user?.name || 'Athlete'}!</h1>
       
-      {/* Risk Score Widget */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        {/* Risk Score Widget */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold mb-4">Current Risk Score</h2>
+          <div className="flex items-center space-x-2 mb-4">
+            <TrendingUp className="h-6 w-6 text-purple-600" />
+            <h2 className="text-xl font-semibold">Current Risk Score</h2>
+          </div>
           
           {currentRiskScore ? (
             <div className="space-y-4">
@@ -73,8 +76,8 @@ export default function Dashboard() {
                     <span>{currentRiskScore.diet_score.toFixed(1)}%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
-                      className="bg-blue-600 h-2 rounded-full" 
+                    <div
+                      className="bg-blue-600 h-2 rounded-full"
                       style={{ width: `${currentRiskScore.diet_score}%` }}
                     />
                   </div>
@@ -91,7 +94,7 @@ export default function Dashboard() {
               <button
                 onClick={handleCalculateRisk}
                 disabled={loading}
-                className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400"
+                className="px-6 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 disabled:bg-gray-400"
               >
                 {loading ? 'Calculating...' : 'Calculate Risk Score'}
               </button>
@@ -101,7 +104,10 @@ export default function Dashboard() {
 
         {/* Quick Stats */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold mb-4">Quick Stats</h2>
+          <div className="flex items-center space-x-2 mb-4">
+            <Award className="h-6 w-6 text-purple-600" />
+            <h2 className="text-xl font-semibold">Quick Stats</h2>
+          </div>
           <div className="space-y-4">
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Athlete ID</span>
@@ -134,7 +140,7 @@ export default function Dashboard() {
               />
               <YAxis domain={[0, 100]} />
               <Tooltip />
-              <Line type="monotone" dataKey="score" stroke="#3b82f6" strokeWidth={2} />
+              <Line type="monotone" dataKey="score" stroke="#8b5cf6" strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>
         </div>
