@@ -4,8 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ATHLYX - Verifiable Athlete Health Credentials</title>
-    <script>
+    <script type="module">
+      import { Buffer } from 'buffer';
+      window.Buffer = Buffer;
       window.global = window;
+      window.process = { env: {} };
     </script>
   </head>
   <body>
