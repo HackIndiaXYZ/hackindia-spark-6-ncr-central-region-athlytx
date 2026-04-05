@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
@@ -8,10 +9,10 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      process: "process/browser",
-      stream: "stream-browserify",
-      zlib: "browserify-zlib",
-      util: 'util',
+      process: path.resolve(__dirname, 'node_modules/process/browser'),
+      stream: path.resolve(__dirname, 'node_modules/stream-browserify'),
+      zlib: path.resolve(__dirname, 'node_modules/browserify-zlib'),
+      util: path.resolve(__dirname, 'node_modules/util'),
     }
   }
 })
