@@ -23,22 +23,20 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black">
-      <Hero
-        trustBadge={{ text: "Securing 500M+ Grassroots Athletes" }}
-        headline={{ line1: "Verifiable Athlete Health", line2: "Credentials on Polygon" }}
-        subtitle="A Web3 + AI healthcare platform empowering athletes with immutable, privacy-first records, automated ZK proofs, and predictive injury risk analysis."
-        buttons={{
-          primary: {
-            text: "Connect Wallet / Enter App",
-            onClick: handleConnectWallet
-          },
-          secondary: {
-            text: "View Dashboard",
-            onClick: () => navigate('/dashboard')
-          }
-        }}
-      />
-    </div>
+    <Hero
+      trustBadge={{ text: "Securing 500M+ Grassroots Athletes" }}
+      headline={{ line1: "Verifiable Athlete Health", line2: "Credentials on Polygon" }}
+      subtitle="A Web3 + AI healthcare platform empowering athletes with immutable, privacy-first records, automated ZK proofs, and predictive injury risk analysis."
+      buttons={{
+        primary: {
+          text: "Connect Wallet / Enter App",
+          onClick: handleConnectWallet
+        },
+        secondary: {
+          text: "View Dashboard",
+          onClick: () => navigate('/dashboard')
+        }
+      }}
+    />
   );
 }
